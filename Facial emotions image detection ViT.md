@@ -29,6 +29,8 @@ patch_size: 16
 
 intermediate_size: 3072
 
+입력 채널 수: 3 (RGB)
+
 입력 이미지 크기
 
 height: 224
@@ -75,6 +77,26 @@ image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
 
 
 
+
+
+### 구성 요소
+
+#### ViTEmbeddings
+- **PatchEmbeddings**: 입력 이미지를 패치(patch)로 분할하고, 각 패치를 임베딩(embedding)하여 모델에 입력.
+- **PositionalEmbeddings**: 패치의 위치 정보를 학습하기 위한 위치 임베딩을 추가.
+
+#### ViTEncoder
+- **ViTLayer**: 여러 개의 ViT 레이어로 구성.
+  - **ViTSdpaAttention**: Multi-head Self-Attention 메커니즘을 사용하여 입력에 대한 어텐션을 계산.
+  - **ViTIntermediate**: Feedforward 네트워크를 통해 어텐션 출력을 중간 특성으로 변환.
+  - **ViTOutput**: 어텐션 출력을 다음 레이어에 전달하기 전에 최종 특성으로 변환.
+  - **LayerNorm**: 레이어 정규화를 통해 입력 데이터를 정규화.
+
+#### Classifier
+- **Linear Layer**: 최종 ViTOutput에서 나온 특성을 감정 클래스로 분류하기 위한 선형 레이어.
+
+
+이 모델은 이미지를 입력으로 받아 감정을 분류하는 ViT 기반의 이미지 분류 모델입니다.
 
 
 
