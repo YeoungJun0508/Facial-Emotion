@@ -81,22 +81,27 @@ ViTFeatureExtractor 함수로 입력 사이즈에 맞게 전처리해서 넣음.
 
 ### 구성 요소
 
-#### ViTEmbeddings
-- **PatchEmbeddings**: 입력 이미지를 패치(patch)로 분할하고, 각 패치를 임베딩(embedding)하여 모델에 입력.
-- **PositionalEmbeddings**: 패치의 위치 정보를 학습하기 위한 위치 임베딩을 추가.
+- **ViTEmbeddings**:
+  - **patch_embeddings**: 입력 이미지를 16x16 크기의 패치로 자르고, 각 패치를 768차원의 임베딩 벡터로 변환하기 위해 Conv2d 프로젝션을 사용.
+  - **dropout**: 드롭아웃 비율은 0.0으로 설정.
 
-#### ViTEncoder
-- **ViTLayer**: 여러 개의 ViT 레이어로 구성.
-  - **ViTSdpaAttention**: Multi-head Self-Attention 메커니즘을 사용하여 입력에 대한 어텐션을 계산.
-  - **ViTIntermediate**: Feedforward 네트워크를 통해 어텐션 출력을 중간 특성으로 변환.
-  - **ViTOutput**: 어텐션 출력을 다음 레이어에 전달하기 전에 최종 특성으로 변환.
-  - **LayerNorm**: 레이어 정규화를 통해 입력 데이터를 정규화.
+- **ViTEncoder**:
+  - **layer**: 12개의 ViTLayer로 구성된 ViTEncoder.
+    - **ViTLayer**: 각 레이어는 다음과 같은 서브 레이어들을 포함.
+      - **ViTSdpaAttention**: Self-Attention 메커니즘을 사용하여 입력에 대한 어텐션을 계산.
+        - **ViTSdpaSelfAttention**: Query, Key, Value를 계산하는 선형 레이어와 드롭아웃을 포함.
+        - **ViTSelfOutput**: 어텐션 출력을 처리하는 데 사용되는 레이어로, 선형 변환과 드롭아웃을 포함.
+      - **ViTIntermediate**: 768차원 입력을 3072차원으로 변환하는 중간 밀집 레이어와 GELU 활성화 함수를 포함.
+      - **ViTOutput**: 3072차원을 다시 768차원으로 변환하는 출력 밀집 레이어와 드롭아웃을 포함.
+    - **layernorm_before, layernorm_after**: 입력 전 후의 레이어 정규화를 수행.
+
+- **layernorm**: 전체 모델에 대한 레이어 정규화를 수행.
 
 #### Classifier
-- **Linear Layer**: 최종 ViTOutput에서 나온 특성을 감정 클래스로 분류하기 위한 선형 레이어.
 
+- **Linear Layer**: ViT의 출력(768차원)을 입력으로 받아 7개의 감정 클래스를 분류하기 위한 선형 레이어.
+- 출력 차원은 7로 설정되어있음.
 
-이 모델은 이미지를 입력으로 받아 감정을 분류하는 ViT 기반의 이미지 분류 모델임.
 
 
 ![image](https://github.com/YeoungJun0508/Facial-Emotion/assets/145903037/846264c6-1f39-4ddd-9e1f-97de9db3653f)
