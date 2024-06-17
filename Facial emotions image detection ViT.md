@@ -61,19 +61,19 @@ ViTFeatureExtractor 함수로 입력 사이즈에 맞게 전처리해서 넣음.
 
 ### 입력 데이터 전처리 방법 (processor)
 
-do_resize: True - 이미지 크기를 조정
+- ** do_resize: True - 이미지 크기를 조정
 
-size: {'height': 224, 'width': 224} - 목표 이미지 크기
+- ** size: {'height': 224, 'width': 224} - 목표 이미지 크기
 
-do_rescale: True - 이미지 값을 0~1 범위로 조정
+- ** do_rescale: True - 이미지 값을 0~1 범위로 조정
 
-rescale_factor: 0.00392156862745098 (1/255)
+- ** rescale_factor: 0.00392156862745098 (1/255)
 
-do_normalize: True - 이미지 평균값과 표준편차를 사용해 정규화
+- ** do_normalize: True - 이미지 평균값과 표준편차를 사용해 정규화
 
-image_mean: [0.5, 0.5, 0.5] - 정규화할 때 사용할 평균값
+- ** image_mean: [0.5, 0.5, 0.5] - 정규화할 때 사용할 평균값
 
-image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
+- ** image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
 
 
 
@@ -96,7 +96,8 @@ image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
 - **Linear Layer**: 최종 ViTOutput에서 나온 특성을 감정 클래스로 분류하기 위한 선형 레이어.
 
 
-이 모델은 이미지를 입력으로 받아 감정을 분류하는 ViT 기반의 이미지 분류 모델입니다.
+이 모델은 이미지를 입력으로 받아 감정을 분류하는 ViT 기반의 이미지 분류 모델임.
 
 
+![image](https://github.com/YeoungJun0508/Facial-Emotion/assets/145903037/846264c6-1f39-4ddd-9e1f-97de9db3653f)
 
