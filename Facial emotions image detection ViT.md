@@ -4,6 +4,7 @@
 
 이 vit모델은 [Facial Emotion Expressions](https://www.kaggle.com/datasets/samaneheslamifar/facial-emotion-expressions) 데이터 셋을 사용했음.
 
+ViT 모델은 이미지를 패치로 분할하고, 각 패치를 토큰으로 처리하여 Transformer 아키텍처를 사용해 이미지 분류를 수행.
 
 ## 모델 구성 (config)
 
@@ -36,3 +37,35 @@ width: 224
  ViT 모델은 이미지를 고정된 크기로 resize하고 normalization을 적용하여 모델에 입력. 
 
 이 모델은 전체 이미지를 바탕으로 감정을 예측하며, 얼굴의 특정 부분을 분리하여 처리하지 않음.
+
+ViTFeatureExtractor 함수로 입력 사이즈에 맞게 전처리해서 넣음.
+
+
+### num_hidden_layers:
+많은 레이어는 모델이 더 복잡한 패턴을 학습할 수 있게 하지만, 계산 비용과 학습 시간이 증가.
+
+### patch_size: 16: 
+입력 이미지가 작은 패치로 분할되어 각 패치가 Transformer 모델에 개별 입력으로 처리됨.
+
+작은 패치는 더 많은 디테일을 포착할 수 있지만, 계산 비용이 증가.
+
+
+### intermediate_size: 3072 
+간 레이어는 입력 벡터를 더 높은 차원으로 매핑하여 비선형성을 추가하고, 모델의 표현력을 증가.
+
+
+### 입력 데이터 전처리 방법 (processor)
+
+do_resize: True - 이미지 크기를 조정
+size: {'height': 224, 'width': 224} - 목표 이미지 크기
+do_rescale: True - 이미지 값을 0~1 범위로 조정
+rescale_factor: 0.00392156862745098 (1/255)
+do_normalize: True - 이미지 평균값과 표준편차를 사용해 정규화
+image_mean: [0.5, 0.5, 0.5] - 정규화할 때 사용할 평균값
+image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
+
+
+
+
+
+
