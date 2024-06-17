@@ -57,11 +57,17 @@ ViTFeatureExtractor 함수로 입력 사이즈에 맞게 전처리해서 넣음.
 ### 입력 데이터 전처리 방법 (processor)
 
 do_resize: True - 이미지 크기를 조정
+
 size: {'height': 224, 'width': 224} - 목표 이미지 크기
+
 do_rescale: True - 이미지 값을 0~1 범위로 조정
+
 rescale_factor: 0.00392156862745098 (1/255)
+
 do_normalize: True - 이미지 평균값과 표준편차를 사용해 정규화
+
 image_mean: [0.5, 0.5, 0.5] - 정규화할 때 사용할 평균값
+
 image_std: [0.5, 0.5, 0.5] - 정규화할 때 사용할 표준편차
 
 
