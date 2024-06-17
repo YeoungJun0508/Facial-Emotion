@@ -1,1 +1,38 @@
+# 감정인식 vit모델
 
+허깅페이스에 올라온 [감정인식 vit모델 ](https://huggingface.co/dima806/facial_emotions_image_detection)
+
+이 vit모델은 [Facial Emotion Expressions](https://www.kaggle.com/datasets/samaneheslamifar/facial-emotion-expressions) 데이터 셋을 사용했음.
+
+
+## 모델 구성 (config)
+
+모델 아키텍처: ViTForImageClassification
+
+이미지 크기: 224x224
+
+감정 클래스: 총 7개의 클래스 (sad, disgust, angry, neutral, fear, surprise, happy)
+
+모델의 주요 하이퍼파라미터:
+
+hidden_size: 768
+
+num_attention_heads: 12
+
+num_hidden_layers: 12
+
+patch_size: 16
+
+intermediate_size: 3072
+
+입력 이미지 크기
+
+height: 224
+width: 224
+
+
+![image](https://github.com/YeoungJun0508/Facial-Emotion/assets/145903037/372cd64a-3073-4f6c-b7c3-943bb9e44eb0) ![image](https://github.com/YeoungJun0508/Facial-Emotion/assets/145903037/9ab5c9c2-044d-447f-905d-64f31be79a3b)
+
+ ViT 모델은 이미지를 고정된 크기로 resize하고 normalization을 적용하여 모델에 입력. 
+
+이 모델은 전체 이미지를 바탕으로 감정을 예측하며, 얼굴의 특정 부분을 분리하여 처리하지 않음.
