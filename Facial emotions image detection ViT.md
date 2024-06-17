@@ -6,6 +6,9 @@
 
 ViT 모델은 이미지를 패치로 분할하고, 각 패치를 토큰으로 처리하여 Transformer 아키텍처를 사용해 이미지 분류를 수행.
 
+Self-Attention 메커니즘을 활용하여 이미지 특징을 추출하고, 최종적으로 선형 레이어를 통해 감정 클래스를 분류
+
+(각 위치의 특성들 간의 관계를 계산)
 ## 모델 구성 (config)
 
 모델 아키텍처: ViTForImageClassification
