@@ -106,3 +106,44 @@ ViTFeatureExtractor 함수로 입력 사이즈에 맞게 전처리해서 넣음.
 
 ![image](https://github.com/YeoungJun0508/Facial-Emotion/assets/145903037/846264c6-1f39-4ddd-9e1f-97de9db3653f)
 
+### MLP 구성
+
+Intermediate Dense Layer:
+
+입력 차원: 768 (Self-Attention 출력의 차원)
+출력 차원: 3072 (4배 확장된 차원)
+활용: 패치 간의 복잡한 상호작용을 학습합니다.
+Activation Function (GELU):
+
+설명: Gaussian Error Linear Unit (GELU) 활성화 함수는 비선형성을 추가하여 모델의 표현 능력을 향상시킵니다.
+Dropout:
+
+설명: 과적합을 방지하기 위해 일정 확률로 뉴런을 무시합니다.
+Output Dense Layer:
+
+입력 차원: 3072 (Intermediate Dense Layer의 출력 차원)
+출력 차원: 768 (원래의 임베딩 차원)
+
+
+
+
+
+### 전체 요약
+
+입력: 224x224 크기의 이미지
+
+출력: 7개의 감정 클래스에 대한 예측 점수 (로짓)
+
+임베딩 값: 14x14 크기의 패치 196개, 각 패치가 벡터로 변환됨
+
+MLP 레이어: 최종적으로 감정을 예측하는 MLP 헤드
+
+레이어별 출력:
+
+입력: (1, 3, 224, 224)
+
+패치 분할 및 임베딩: (1, 196, 임베딩 차원)
+
+트랜스포머 블록을 통과한 출력: (1, 196, 임베딩 차원)
+
+최종 MLP 헤드: (1, 7) (로짓)
